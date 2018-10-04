@@ -1,0 +1,27 @@
+{
+  "name": "react-native-rate-modal",
+  "version": "1.0.0",
+  "description": "\"Rate us on Google Play/Play Store\" modal with React Native.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omergulen/react-native-rate-modal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/omergulen/react-native-rate-modal/issues"
+  },
+  "homepage": "https://github.com/omergulen/react-native-rate-modal#readme",
+  "devDependencies": {
+    "prop-types": "^15.6.2",
+    "react": "^16.5.2",
+    "react-native": "^0.57.1",
+    "react-native-elements": "^0.19.1",
+    "react-native-storage": "^0.2.2",
+    "tslib": "^1.9.3"
+  }
+}
