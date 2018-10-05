@@ -106,48 +106,33 @@ export default class RateModal extends Component {
 
   starPressed(count) {
     DataStore.setRated();
-
-    switch (count) {
-      case 1:
-        break;
-      case 2:
-        this.setState({ activeStar: 2 });
-        setTimeout(() => {
+      this.setState({ activeStar: count });
+      setTimeout(() => {
           this.setState({ modalVisible: false });
           this.props.twoStarsOnPress;
-        }, 300);
-        break;
-      case 3:
-        this.setState({
-          activeStar: 3
-        });
-        setTimeout(() => {
-          this.setState({ modalVisible: false });
-          this.props.threeStarsOnPress;
-        }, 300);
-        break;
-      case 4:
-        this.setState({
-          activeStar: 4
-        });
-        setTimeout(() => {
-          this.setState({ modalVisible: false });
-          this.props.fourStarsOnPress;
-        }, 300);
-        break;
-      case 5:
-        this.setState({
-          activeStar: 5
-        });
-        setTimeout(() => {
-          this.setState({ modalVisible: false });
-          this.props.fiveStarsOnPress;
-        }, 300);
-        break;
-    }
+      }, 300);
   }
 
   render() {
+
+    const starButtons = Array(1,2,3,4,5).map((e,i)=>{
+      return (
+          <TouchableHighlight
+              onPress={() => {
+                  this.starPressed(e);
+              }}
+              underlayColor="white"
+          >
+              <Icon
+                  name={this.props.iconName}
+                  type={this.props.iconType}
+                  color={this.decideColor(e)}
+                  size={50}
+              />
+          </TouchableHighlight>
+      )
+    });
+
     return (
       <Modal
         animationType="slide"
@@ -160,77 +145,8 @@ export default class RateModal extends Component {
         <View style={styles.modal}>
           <Text style={styles.modalText}>{this.props.rateUsText}</Text>
           <View style={styles.buttons}>
-            <TouchableHighlight
-              onPress={() => {
-                this.starPressed(1);
-              }}
-              underlayColor="white"
-            >
-              <Icon
-                name={this.props.iconName}
-                type={this.props.iconType}
-                color={this.decideColor(1)}
-                size={50}
-              />
-            </TouchableHighlight>
-
-            <TouchableHighlight
-              onPress={() => {
-                this.starPressed(2);
-              }}
-              underlayColor="white"
-            >
-              <Icon
-                name={this.props.iconName}
-                type={this.props.iconType}
-                color={this.decideColor(2)}
-                size={50}
-              />
-            </TouchableHighlight>
-
-            <TouchableHighlight
-              onPress={() => {
-                this.starPressed(3);
-              }}
-              underlayColor="white"
-            >
-              <Icon
-                name={this.props.iconName}
-                type={this.props.iconType}
-                color={this.decideColor(3)}
-                size={50}
-              />
-            </TouchableHighlight>
-
-            <TouchableHighlight
-              onPress={() => {
-                this.starPressed(4);
-              }}
-              underlayColor="white"
-            >
-              <Icon
-                name={this.props.iconName}
-                type={this.props.iconType}
-                color={this.decideColor(4)}
-                size={50}
-              />
-            </TouchableHighlight>
-
-            <TouchableHighlight
-              onPress={() => {
-                this.starPressed(5);
-              }}
-              underlayColor="white"
-            >
-              <Icon
-                name={this.props.iconName}
-                type={this.props.iconType}
-                color={this.decideColor(5)}
-                size={50}
-              />
-            </TouchableHighlight>
+              {starButtons}
           </View>
-
           <View style={styles.subButtons}>
             <TouchableHighlight
               onPress={() => {

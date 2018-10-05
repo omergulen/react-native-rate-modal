@@ -1,6 +1,6 @@
 import Storage from 'react-native-storage';
 import { AsyncStorage } from 'react-native';
-import { __read } from '../../node_modules/tslib';
+import { __read } from 'tslib';
 
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-await-in-loop */
