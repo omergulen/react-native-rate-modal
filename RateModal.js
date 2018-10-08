@@ -12,12 +12,8 @@ import PropTypes from "prop-types";
 import DataStore from "./DataStore";
 
 RateModal.propTypes = {
-    rateUsText: PropTypes.string,
 
-  twoStarsOnPress: PropTypes.func,
-  threeStarsOnPress: PropTypes.func,
-  fourStarsOnPress: PropTypes.func,
-  fiveStarsOnPress: PropTypes.func,
+  rateUsText: PropTypes.string,
 
   onPress: PropTypes.func,
 
@@ -99,7 +95,9 @@ export default class RateModal extends Component {
         animationType="slide"
         transparent={true}
         visible={this.state.modalVisible}
-        onRequestClose={() => {alert("Modal has been closed.");}}
+        onRequestClose={() => {
+          alert("Modal has been closed.");
+        }}
       >
         <View style={styles.modal}>
           <Text style={styles.modalText}>{this.props.rateUsText}</Text>
