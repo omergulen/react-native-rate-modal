@@ -1,24 +1,22 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import {
-  Alert,
   Modal,
   Text,
   TouchableHighlight,
   View,
   StyleSheet
 } from "react-native";
-import { Icon } from "react-native-elements";
+import {Icon} from "react-native-elements";
 import PropTypes from "prop-types";
 
 import DataStore from "./DataStore";
 
 RateModal.propTypes = {
+
   rateUsText: PropTypes.string,
-  starOnPressFunctions: PropTypes.arrayOf.func,
-  twoStarsOnPress: PropTypes.func,
-  threeStarsOnPress: PropTypes.func,
-  fourStarsOnPress: PropTypes.func,
-  fiveStarsOnPress: PropTypes.func,
+
+  onPress: PropTypes.func,
+
   showFrequency: PropTypes.number,
   firstShow: PropTypes.number,
   defaultColor: PropTypes.string,
@@ -34,23 +32,6 @@ RateModal.propTypes = {
 
 // Default values for props
 RateModal.defaultProps = {
-  starOnPressFunctions: [
-    () => {
-      Alert.alert(1);
-    },
-    () => {
-      Alert.alert(2);
-    },
-    () => {
-      Alert.alert(3);
-    },
-    () => {
-      Alert.alert(4);
-    },
-    () => {
-      Alert.alert(5);
-    }
-  ],
   showFrequency: 5,
   firstShow: 2,
   defaultColor: "#AAA",
@@ -83,7 +64,7 @@ export default class RateModal extends Component {
         (this.state.rateCounter == this.props.firstShow ||
           this.state.rateCounter % this.props.showFrequency == 0)
       ) {
-        this.setState({ modalVisible: true });
+        this.setState({modalVisible: true});
       }
     });
   }
@@ -96,55 +77,16 @@ export default class RateModal extends Component {
     }
   }
 
-  doActionOnStarPressed(starId) {
-    this.setState({ activeStar: starId });
-    setTimeout(() => {
-      this.setState({ modalVisible: false });
-      this.props.starOnPressFunctions[starId - 1];
-    }, 300);
-  }
-
   starPressed(count) {
+
     DataStore.setRated();
 
-    switch (count) {
-      case 1:
-        break;
-      case 2:
-        this.setState({ activeStar: 2 });
-        setTimeout(() => {
-          this.setState({ modalVisible: false });
-          this.props.twoStarsOnPress;
-        }, 300);
-        break;
-      case 3:
-        this.setState({
-          activeStar: 3
-        });
-        setTimeout(() => {
-          this.setState({ modalVisible: false });
-          this.props.threeStarsOnPress;
-        }, 300);
-        break;
-      case 4:
-        this.setState({
-          activeStar: 4
-        });
-        setTimeout(() => {
-          this.setState({ modalVisible: false });
-          this.props.fourStarsOnPress;
-        }, 300);
-        break;
-      case 5:
-        this.setState({
-          activeStar: 5
-        });
-        setTimeout(() => {
-          this.setState({ modalVisible: false });
-          this.props.fiveStarsOnPress;
-        }, 300);
-        break;
-    }
+    this.setState({activeStar: count});
+    setTimeout(() => {
+      this.setState({modalVisible: false});
+      this.props.onPress(count);
+    }, 300);
+
   }
 
   render() {
@@ -234,7 +176,7 @@ export default class RateModal extends Component {
           <View style={styles.subButtons}>
             <TouchableHighlight
               onPress={() => {
-                this.setState({ modalVisible: false });
+                this.setState({modalVisible: false});
               }}
               underlayColor="white"
             >
@@ -243,7 +185,7 @@ export default class RateModal extends Component {
 
             <TouchableHighlight
               onPress={() => {
-                this.setState({ modalVisible: false });
+                this.setState({modalVisible: false});
                 DataStore.setRated();
               }}
               underlayColor="white"
