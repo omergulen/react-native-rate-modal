@@ -12,11 +12,8 @@ import PropTypes from "prop-types";
 import DataStore from "./DataStore";
 
 RateModal.propTypes = {
-
   rateUsText: PropTypes.string,
-
-  onPress: PropTypes.func,
-
+  onPress: PropTypes.func.isRequired,
   showFrequency: PropTypes.number,
   firstShow: PropTypes.number,
   defaultColor: PropTypes.string,
@@ -78,7 +75,7 @@ export default class RateModal extends Component {
   }
 
   starPressed(count) {
-
+    
     DataStore.setRated();
 
     this.setState({activeStar: count});
